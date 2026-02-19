@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mayan Sharma — Applied AI/ML Engineer</title>
+<title>Mayan Sharma, Applied AI/ML Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
@@ -15,7 +15,7 @@
 :root {
   --bg:      #f7f4ef;
   --ink:     #141414;
-  --muted:   rgba(20,20,20,0.36);
+  --muted:   rgba(20,20,20,0.62);
   --faint:   rgba(20,20,20,0.07);
 
   /* Pastel palette */
@@ -145,7 +145,7 @@ body.on-link #cur-ring { width: 46px; height: 46px; border-color: rgba(232,160,1
   font-size: 9px; letter-spacing: .28em; text-transform: uppercase;
   color: var(--muted); margin-bottom: 8px;
 }
-.hm-val { font-size: 12px; font-weight: 300; line-height: 1.7; color: rgba(20,20,20,.6); letter-spacing: .03em; }
+.hm-val { font-size: 12px; font-weight: 300; line-height: 1.7; color: rgba(20,20,20,.82); letter-spacing: .03em; }
 .hero-hint {
   padding: 22px 0 36px; font-size: 9px; letter-spacing: .28em;
   text-transform: uppercase; color: var(--muted);
@@ -173,7 +173,7 @@ body.on-link #cur-ring { width: 46px; height: 46px; border-color: rgba(232,160,1
 .about-r { flex: 1; }
 .about-body {
   font-size: 15px; line-height: 2.05; font-weight: 300;
-  color: rgba(20,20,20,.55); letter-spacing: .025em;
+  color: rgba(20,20,20,.80); letter-spacing: .025em;
   max-width: 520px; margin-bottom: 56px;
 }
 .about-body b { font-weight: 400; color: var(--ink); }
@@ -191,7 +191,7 @@ body.on-link #cur-ring { width: 46px; height: 46px; border-color: rgba(232,160,1
 }
 .stat::before {
   content: ''; position: absolute; inset: 0;
-  background: var(--accent-bg, var(--pink-bg));
+  background: rgba(20,20,20,0.04);
   opacity: 0; transition: opacity .35s;
 }
 .stat:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(20,20,20,.09); }
@@ -240,7 +240,7 @@ body.on-link #cur-ring { width: 46px; height: 46px; border-color: rgba(232,160,1
   font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
   color: var(--muted); margin-bottom: 12px;
 }
-.exp-org { font-size: 11px; line-height: 1.7; color: rgba(20,20,20,.4); font-weight: 300; letter-spacing: .03em; }
+.exp-org { font-size: 11px; line-height: 1.7; color: rgba(20,20,20,.70); font-weight: 300; letter-spacing: .03em; }
 .exp-body { flex: 1; }
 .exp-role {
   font-family: var(--display);
@@ -251,74 +251,165 @@ body.on-link #cur-ring { width: 46px; height: 46px; border-color: rgba(232,160,1
 .exp-item:hover .exp-role { letter-spacing: .025em; }
 .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .exp-bullets li {
-  font-size: 12px; line-height: 1.85; color: rgba(20,20,20,.48);
+  font-size: 12px; line-height: 1.85; color: rgba(20,20,20,.74);
   font-weight: 300; letter-spacing: .03em;
   padding-left: 18px; position: relative;
   transition: color .4s var(--ease);
 }
-.exp-item:hover .exp-bullets li { color: rgba(20,20,20,.62); }
+.exp-item:hover .exp-bullets li { color: rgba(20,20,20,.88); }
 .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--pink); }
 
 /* ── PROJECTS ── */
 .projects { padding: 0 56px 148px; }
-.proj-item {
-  display: flex; gap: 80px; align-items: flex-start;
-  padding: 64px 0; border-bottom: 1px solid var(--faint);
+
+/* Accordion rows */
+.proj-accordion { margin-top: 8px; }
+
+.pa-row {
+  border-bottom: 1px solid var(--faint);
+  overflow: hidden;
 }
-.proj-item:last-child { border-bottom: none; }
-.proj-l { width: 42%; flex-shrink: 0; }
-.proj-count {
-  font-family: var(--display); font-size: 72px; line-height: 1;
-  color: rgba(20,20,20,.05); margin-bottom: -12px; user-select: none;
+.pa-row:first-child { border-top: 1px solid var(--faint); }
+
+/* Clickable header row */
+.pa-head {
+  display: flex; align-items: center;
+  padding: 0; cursor: pointer;
+  position: relative;
+  transition: background .4s var(--ease);
+  user-select: none;
 }
-.proj-title {
+.pa-head:hover { background: rgba(20,20,20,.022); }
+
+.pa-num {
   font-family: var(--display);
-  font-size: clamp(44px, 5.8vw, 80px);
-  line-height: .88; letter-spacing: -.015em; margin-bottom: 10px;
+  font-size: clamp(52px, 7vw, 88px);
+  line-height: 1;
+  color: rgba(20,20,20,.07);
+  width: 120px; flex-shrink: 0;
+  padding: 22px 0 18px 0;
+  transition: color .5s var(--ease), transform .5s var(--ease);
+  transform-origin: left center;
 }
-.proj-sub {
-  font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 28px;
+.pa-row.open .pa-num {
+  color: rgba(20,20,20,.14);
+  transform: scale(1.06) translateX(4px);
 }
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.pa-title-wrap { flex: 1; padding: 26px 0; }
+.pa-title {
+  font-family: var(--display);
+  font-size: clamp(26px, 3.6vw, 52px);
+  line-height: 1; letter-spacing: -.01em;
+  color: var(--ink);
+  transition: letter-spacing .5s var(--ease);
+}
+.pa-row.open .pa-title { letter-spacing: .015em; }
+
+.pa-sub {
+  font-size: 9px; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--muted); margin-top: 6px;
+  opacity: 0; transform: translateY(4px);
+  transition: opacity .4s var(--ease), transform .4s var(--ease);
+}
+.pa-row.open .pa-sub { opacity: 1; transform: none; transition-delay: .1s; }
+
+/* Arrow indicator */
+.pa-arrow {
+  width: 36px; height: 36px; flex-shrink: 0; margin-right: 8px;
+  border: 1px solid rgba(20,20,20,.12); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .55s var(--ease), border-color .4s, background .4s;
+  color: rgba(20,20,20,.4);
+}
+.pa-row.open .pa-arrow {
+  transform: rotate(45deg);
+  border-color: rgba(20,20,20,.3);
+  background: rgba(20,20,20,.04);
+  color: var(--ink);
+}
+
+/* Expandable body */
+.pa-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .6s var(--ease);
+}
+.pa-row.open .pa-body { grid-template-rows: 1fr; }
+.pa-body-inner {
+  overflow: hidden;
+}
+.pa-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 72px;
+  padding: 0 0 40px 120px; /* align with title */
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .45s var(--ease) .1s, transform .45s var(--ease) .1s;
+}
+.pa-row.open .pa-content {
+  opacity: 1; transform: none;
+}
+
+/* Content cols */
+.pa-left {}
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 24px; }
 .tag {
   font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
-  padding: 6px 13px; border-radius: 3px;
-  background: var(--glass);
+  padding: 5px 12px; border-radius: 2px;
+  background: rgba(247,244,239,0.7);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(20,20,20,.08);
-  color: rgba(20,20,20,.52);
-  transition: background .3s var(--ease), border-color .3s, color .3s, transform .3s var(--ease);
+  border: 1px solid rgba(20,20,20,.09);
+  color: rgba(20,20,20,.62);
+  transition: background .25s, border-color .25s, color .25s, transform .25s var(--ease);
   cursor: default;
 }
-.tag:hover { transform: translateY(-2px); }
-/* Per-tag tints applied via JS */
-
-.proj-r { flex: 1; padding-top: 18px; }
-.proj-desc {
-  font-size: 13px; line-height: 2; color: rgba(20,20,20,.5);
-  font-weight: 300; letter-spacing: .03em; margin-bottom: 36px;
+.tag:hover {
+  transform: translateY(-2px);
+  background: rgba(20,20,20,0.06);
+  border-color: rgba(20,20,20,0.2);
+  color: rgba(20,20,20,.88);
 }
 
-/* Project callout card — replaces ghost metric text */
+.pa-right {}
+.proj-desc {
+  font-size: 13px; line-height: 2.0; color: rgba(20,20,20,.76);
+  font-weight: 300; letter-spacing: .025em; margin-bottom: 28px;
+}
+
 .proj-callout {
   background: var(--glass);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-b); border-radius: 6px;
-  padding: 24px 28px;
-  display: flex; flex-direction: column; gap: 6px;
-  max-width: 320px;
+  border: 1px solid var(--glass-b); border-radius: 5px;
+  padding: 20px 24px;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 4px 20px;
   transition: box-shadow .4s var(--ease), transform .4s var(--ease);
 }
 .proj-callout:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(20,20,20,.08); }
 .callout-label {
   font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--muted);
+  grid-column: 1;
 }
 .callout-val {
-  font-family: var(--display); font-size: 36px; line-height: 1;
-  letter-spacing: .01em;
+  font-family: var(--display); font-size: 40px; line-height: 1; letter-spacing: .01em;
+  grid-column: 2; grid-row: 1 / 3;
 }
-.callout-sub { font-size: 11px; font-weight: 300; color: rgba(20,20,20,.45); line-height: 1.6; margin-top: 2px; }
+.callout-sub {
+  font-size: 10px; font-weight: 300; color: rgba(20,20,20,.68); line-height: 1.5;
+  grid-column: 1;
+}
+
+.proj-gh {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(20,20,20,.48); text-decoration: none;
+  margin-top: 18px; padding-bottom: 2px;
+  border-bottom: 1px solid rgba(20,20,20,.14);
+  transition: color .3s, border-color .3s;
+}
+.proj-gh:hover { color: var(--ink); border-color: var(--ink); }
 
 /* ── SKILLS ── */
 .skills { padding: 0 56px 148px; }
@@ -344,14 +435,14 @@ body.on-link #cur-ring { width: 46px; height: 46px; border-color: rgba(232,160,1
 .chips { display: flex; flex-wrap: wrap; gap: 7px; }
 .chip {
   font-size: 11px; font-weight: 300; letter-spacing: .04em;
-  color: rgba(20,20,20,.60); padding: 5px 13px;
+  color: rgba(20,20,20,.68); padding: 5px 13px;
   background: rgba(247,244,239,.65);
   border: 1px solid rgba(20,20,20,.08); border-radius: 3px;
   transition: background .3s var(--ease), border-color .3s, color .3s, transform .3s var(--ease);
   cursor: default;
 }
 .chip:hover { transform: translateY(-1px); }
-/* Per-chip pastel tints applied via JS */
+
 
 /* ── CONTACT ── */
 .contact { padding: 80px 56px 120px; }
@@ -411,21 +502,128 @@ body.on-link #cur-ring { width: 46px; height: 46px; border-color: rgba(232,160,1
   to   { opacity: 1; transform: scaleX(1); }
 }
 
-/* ── Mobile ── */
-@media (max-width: 860px) {
-  #nav { padding: 0 24px; }
+/* ── Hamburger menu (mobile only) ── */
+#nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 6px; z-index: 300;
+}
+#nav-hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--ink);
+  transition: transform .4s var(--ease), opacity .3s;
+  transform-origin: center;
+}
+body.nav-open #nav-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+body.nav-open #nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+body.nav-open #nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile nav drawer */
+#nav-drawer {
+  display: none;
+  position: fixed; inset: 0; top: 54px; z-index: 190;
+  background: rgba(247,244,239,.97);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  flex-direction: column; align-items: flex-start; justify-content: center;
+  padding: 0 32px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s var(--ease);
+}
+body.nav-open #nav-drawer { opacity: 1; pointer-events: all; }
+#nav-drawer a {
+  font-family: var(--display); font-size: 52px; letter-spacing: .04em;
+  text-decoration: none; color: var(--ink); opacity: .18;
+  transition: opacity .25s, letter-spacing .4s var(--ease);
+  line-height: 1.15;
+}
+#nav-drawer a:hover { opacity: 1; letter-spacing: .07em; }
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) {
+  #cur-dot, #cur-ring { display: none; }
+  body { cursor: auto; }
+}
+
+/* ── Tablet (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .hero { padding-left: 40px; padding-right: 40px; }
+  .about, .experience, .projects, .skills, .contact { padding-left: 40px; padding-right: 40px; }
+  #nav { padding: 0 40px; }
+  .about-l { width: 42%; padding-right: 48px; }
+  .pa-num { width: 90px; }
+  .pa-content { padding-left: 90px; gap: 0 40px; }
+}
+
+/* ── Mobile (≤ 768px) ── */
+@media (max-width: 768px) {
+  /* Nav */
+  #nav { padding: 0 20px; }
   .nav-links { display: none; }
-  .hero, .about, .experience, .projects, .skills, .contact { padding-left: 24px; padding-right: 24px; }
-  .about { flex-direction: column; }
-  .about-l { width: 100%; padding-right: 0; padding-bottom: 28px; }
-  .exp-item { flex-direction: column; gap: 14px; }
-  .exp-meta { width: 100%; }
-  .proj-item { flex-direction: column; gap: 28px; }
-  .proj-l { width: 100%; }
+  #nav-hamburger { display: flex; }
+  #nav-drawer { display: flex; }
+
+  /* Global padding */
+  .hero, .about, .experience, .projects, .skills, .contact { padding-left: 20px; padding-right: 20px; }
+  .foot { padding: 18px 20px; }
+
+  /* Hero */
+  .hero { padding-top: 100px; }
+  .hero-meta { flex-direction: column; gap: 0; }
+  .hm { padding-right: 0 !important; padding-left: 0 !important; border-left: none !important; border-top: 1px solid var(--faint); padding-top: 16px; margin-top: 16px; }
+  .hm:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+
+  /* About */
+  .about { flex-direction: column; padding-top: 80px; padding-bottom: 80px; }
+  .about-l { width: 100%; padding-right: 0; padding-bottom: 24px; }
+  .about-h { font-size: clamp(52px, 14vw, 80px); }
+  .stats { gap: 8px; }
+  .stat { padding: 16px 18px; flex: 1; min-width: calc(50% - 4px); }
+  .stat-n { font-size: 36px; }
+
+  /* Section headers */
+  .sec-intro { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 40px; }
+  .sec-note { text-align: left; max-width: 100%; }
+  .sec-h { font-size: clamp(44px, 13vw, 72px); }
+
+  /* Experience */
+  .experience { padding-bottom: 80px; }
+  .exp-item { flex-direction: column; gap: 12px; padding: 36px 0; }
+  .exp-meta { width: 100%; padding-right: 0; }
+  .exp-role { font-size: clamp(24px, 7vw, 38px); }
+  .exp-bullets li { font-size: 12px; }
+
+  /* Projects accordion */
+  .projects { padding-bottom: 80px; }
+  .pa-num { width: 56px; font-size: 36px; padding: 16px 0 12px; }
+  .pa-title { font-size: clamp(20px, 6vw, 32px); }
+  .pa-title-wrap { padding: 18px 0; }
+  .pa-arrow { width: 30px; height: 30px; margin-right: 0; }
+  .pa-content {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    gap: 24px;
+    padding-bottom: 28px;
+  }
+  .proj-callout { grid-template-columns: 1fr; }
+  .callout-val { grid-column: 1; grid-row: auto; font-size: 32px; }
+
+  /* Skills */
+  .skills { padding-bottom: 80px; }
+  .sg { padding: 20px 20px; }
+
+  /* Contact */
+  .contact { padding: 60px 20px 80px; }
+  .contact-top { padding-top: 56px; }
   .contact-links { flex-direction: column; }
-  .cl { border-right: none; border-bottom: 1px solid var(--faint); width: 100%; }
-  .sec-intro { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .sec-note { text-align: left; }
+  .cl { border-right: none; border-bottom: 1px solid var(--faint); width: 100%; padding: 20px 24px; }
+  .cl:last-child { border-bottom: none; }
+}
+
+/* ── Small phones (≤ 390px) ── */
+@media (max-width: 390px) {
+  .stat { min-width: 100%; }
+  .pa-title { font-size: 18px; }
+  #nav-drawer a { font-size: 40px; }
 }
 </style>
 </head>
@@ -442,7 +640,17 @@ body.on-link #cur-ring { width: 46px; height: 46px; border-color: rgba(232,160,1
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
   </div>
+  <div id="nav-hamburger" onclick="document.body.classList.toggle('nav-open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+<div id="nav-drawer">
+  <a href="#about"      onclick="document.body.classList.remove('nav-open')">About</a>
+  <a href="#experience" onclick="document.body.classList.remove('nav-open')">Work</a>
+  <a href="#projects"   onclick="document.body.classList.remove('nav-open')">Projects</a>
+  <a href="#skills"     onclick="document.body.classList.remove('nav-open')">Skills</a>
+  <a href="#contact"    onclick="document.body.classList.remove('nav-open')">Contact</a>
+</div>
 <div id="root"></div>
 
 <script type="text/babel">
@@ -463,17 +671,7 @@ function useReveal(delay = 0) {
   return ref;
 }
 
-/* ── Pastel tint palette ── */
-const PASTELS = [
-  { bg: 'rgba(232,160,180,0.11)', border: 'rgba(232,160,180,0.28)', hover: 'rgba(232,160,180,0.22)' },
-  { bg: 'rgba(168,197,181,0.11)', border: 'rgba(168,197,181,0.28)', hover: 'rgba(168,197,181,0.22)' },
-  { bg: 'rgba(184,174,212,0.11)', border: 'rgba(184,174,212,0.28)', hover: 'rgba(184,174,212,0.22)' },
-  { bg: 'rgba(232,196,160,0.11)', border: 'rgba(232,196,160,0.28)', hover: 'rgba(232,196,160,0.22)' },
-  { bg: 'rgba(160,196,220,0.11)', border: 'rgba(160,196,220,0.28)', hover: 'rgba(160,196,220,0.22)' },
-];
-function pastel(i) { return PASTELS[i % PASTELS.length]; }
-
-/* ── Tag — neutral glass, no pastel tint ── */
+/* ── Tag — neutral glass hover ── */
 function Tag({ label, idx }) {
   const [hov, setHov] = useState(false);
   return (
@@ -490,9 +688,8 @@ function Tag({ label, idx }) {
   );
 }
 
-/* ── Chip with pastel tint ── */
+/* ── Chip with clean glass hover ── */
 function Chip({ label, idx }) {
-  const p = pastel(idx);
   const [hov, setHov] = useState(false);
   return (
     <span
@@ -500,8 +697,8 @@ function Chip({ label, idx }) {
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
-        background: hov ? p.hover : 'rgba(247,244,239,0.65)',
-        borderColor: hov ? p.border : 'rgba(20,20,20,0.08)',
+        background: hov ? 'rgba(20,20,20,0.07)' : 'rgba(247,244,239,0.65)',
+        borderColor: hov ? 'rgba(20,20,20,0.22)' : 'rgba(20,20,20,0.08)',
         color: hov ? 'rgba(20,20,20,0.88)' : 'rgba(20,20,20,0.60)',
       }}
     >{label}</span>
@@ -525,16 +722,14 @@ function Hero() {
   );
 }
 
-/* ── ABOUT ── */
-const STAT_ACCENTS = ['--pink-bg','--sage-bg','--lav-bg','--peach-bg'];
 function About() {
   const lRef = useReveal(0);
   const rRef = useReveal(0.1);
   const stats = [
-    { n:'97', sup:'%',  l:'Detection Accuracy' },
-    { n:'10K',sup:'+',  l:'Images Auto-Labelled' },
-    { n:'50K',sup:'+',  l:'Graph Snapshots' },
-    { n:'73', sup:'%',  l:'Complexity Reduced' },
+    { n:'CS',  sup:'',   l:'Machine Learning · VIT Chennai' },
+    { n:'2',   sup:'×',  l:'Production Internships' },
+    { n:'5',   sup:'+',  l:'Systems Shipped to Research Labs' },
+    { n:'ML',  sup:'',   l:'Vision · GNNs · LLMs' },
   ];
   return (
     <section className="about" id="about">
@@ -544,12 +739,12 @@ function About() {
       </div>
       <div className="about-r sr d1" ref={rRef}>
         <p className="about-body">
-          I build <b>intelligent systems</b> that work under real-world constraints — deployed in defence labs, research centres, and production environments. My work spans computer vision pipelines, temporal graph networks, and large language model fine-tuning.<br/><br/>
+          I build <b>intelligent systems</b> that work under real-world constraints, deployed in defence labs, research centres, and production environments. My work spans computer vision pipelines, temporal graph networks, and large language model fine-tuning.<br/><br/>
           Not interested in demos. <b>Interested in impact.</b>
         </p>
         <div className="stats">
           {stats.map((s,i) => (
-            <div className="stat" key={i} style={{'--accent-bg': `var(${STAT_ACCENTS[i]})`}}>
+            <div className="stat" key={i}>
               <div className="stat-n">{s.n}<sup>{s.sup}</sup></div>
               <div className="stat-l">{s.l}</div>
             </div>
@@ -563,22 +758,22 @@ function About() {
 /* ── EXPERIENCE ── */
 const EXP = [
   {
-    period: 'May — July 2025',
+    period: 'May to July 2025',
     org: ['Defence Research &', 'Development Organization', 'Agra, India'],
     role: 'APPLIED ML ENGINEER',
     bullets: [
       'Built and deployed a real-time aircraft recognition system to automate arresting-gear selection, improving landing safety under operational constraints',
       'Designed two-stage vision pipeline: YOLOv8 detection + classification, optimised for low-latency inference',
       'Created custom auto-annotation model labelling 10,000+ images across 5 aircraft classes',
-      'Achieved 97% real-time accuracy — most reliable model deployed for this use case at DRDO',
+      'Achieved 97% real-time accuracy, the most reliable model deployed for this use case at DRDO',
     ]
   },
   {
-    period: 'May — July 2024',
+    period: 'May to July 2024',
     org: ['Centre for Nano Electronics', '& VLSI Design', 'VIT University, Chennai'],
     role: 'ML & SYSTEMS ENGINEER',
     bullets: [
-      'Built automated FIR filter design system in Python — reduced manual design time by 50%',
+      'Built automated FIR filter design system in Python, reducing manual design time by 50%',
       'Implemented coefficient optimisation algorithms handling 100+ parameters, improving hardware efficiency 25%',
       'Developed Verilog code generator for FPGA deployment, lowering hardware complexity and development cost',
       'Integrated Excel-based coefficient pipeline enabling rapid iteration across 10+ filter configurations',
@@ -623,43 +818,78 @@ const PROJECTS = [
   {
     n:'01', title:'LAMDA', sub:'Supply Chain Risk Prediction',
     tags:['PyTorch','Temporal Graph Networks','GNN','Python'],
-    desc:'End-to-end ML system predicting supply chain disruptions from global event streams — news, weather, strikes. Temporal Graph Network pipeline processing 50,000+ graph snapshots across 7 risk indicators. Identified 1,400+ high-risk nodes with 16% accuracy improvement over GCN baselines. Reduced overfitting 40%, complexity 73%.',
-    callout: {
-      label: 'Accuracy over baseline',
-      val: '+16%',
-      sub: 'over GCN baselines · 1,400+ high-risk nodes identified'
-    }
+    desc:'End-to-end ML system predicting supply chain disruptions from global event streams: news, weather, strikes. Temporal Graph Network pipeline processing 50,000+ graph snapshots across 7 risk indicators. Identified 1,400+ high-risk nodes with 16% accuracy improvement over GCN baselines. Reduced overfitting 40%, complexity 73%.',
+    callout:{ label:'Accuracy over baseline', val:'+16%', sub:'over GCN baselines · 1,400+ nodes identified' },
+    gh:'https://github.com/Mayan10/LAMDA'
   },
   {
     n:'02', title:'DRAFTEASE', sub:'Floor Plan Retrieval & CAD Automation',
     tags:['KNN','OpenCV','DXF / CAD','Dataset Engineering','Python'],
     desc:'ML-based system retrieving nearest-matching floor plans from user requirements and converting them to DXF CAD files. Auto-labelling pipeline, KNN retrieval engine, and tracing-based CAD export.',
-    callout: {
-      label: 'From requirement to CAD file',
-      val: 'Sub-second',
-      sub: 'near-instant generation · zero manual drafting'
-    }
-  }
+    callout:{ label:'From requirement to CAD file', val:'<1s', sub:'near-instant generation · zero manual drafting' },
+    gh:'https://github.com/Mayan10/DraftEase'
+  },
+  {
+    n:'03', title:'DEEP DEFEND', sub:'Deepfake Detection System',
+    tags:['Computer Vision','EfficientNet','Transformers','PyTorch','Python'],
+    desc:'Deepfake detection pipeline leveraging EfficientNet and Vision Transformers to classify manipulated media with high precision. Built for adversarial robustness across diverse datasets and manipulation techniques.',
+    callout:{ label:'Detection approach', val:'Hybrid', sub:'CNN + Transformer fusion · adversarially robust' },
+    gh:'https://github.com/Mayan10/DEEP_DEFEND'
+  },
+  {
+    n:'04', title:'HQLSTM', sub:'Quantum-Classical Hybrid Sequence Model',
+    tags:['Quantum ML','PennyLane','LSTM','PyTorch','Research'],
+    desc:'Enhanced Hybrid Quantum-LSTM model integrating parameterized quantum circuits into classical LSTM architecture. Investigates quantum advantage for temporal sequence learning with reduced parameter complexity.',
+    callout:{ label:'Architecture', val:'Hybrid', sub:'quantum circuits + classical LSTM · parameter-efficient' },
+    gh:'https://github.com/Mayan10/Enhanced-HQLSTM-Model'
+  },
+  {
+    n:'05', title:'SOLAR DASH', sub:'Real-Time Solar Energy Dashboard',
+    tags:['React','Python','Data Viz','REST API','IoT'],
+    desc:'Live solar energy monitoring dashboard with real-time data ingestion, performance analytics, and predictive efficiency insights. Deployed for operational monitoring with a clean, responsive UI built for field use.',
+    callout:{ label:'Data refresh', val:'Live', sub:'real-time ingestion · predictive efficiency tracking' },
+    gh:'https://github.com/Mayan10/final-solar'
+  },
 ];
 
-function ProjItem({ p, delay }) {
-  const ref = useReveal(delay);
+const GH_ICON = <svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>;
+
+function ProjRow({ p, isOpen, onToggle }) {
   return (
-    <div className="proj-item sr" ref={ref}>
-      <div className="proj-l">
-        <div className="proj-count">{p.n}</div>
-        <h3 className="proj-title">{p.title}</h3>
-        <div className="proj-sub">{p.sub}</div>
-        <div className="tag-cloud">
-          {p.tags.map((t,i) => <Tag key={i} label={t} idx={i}/>)}
+    <div className={`pa-row${isOpen ? ' open' : ''}`}>
+      <div className="pa-head" onClick={onToggle} role="button" aria-expanded={isOpen}>
+        <div className="pa-num">{p.n}</div>
+        <div className="pa-title-wrap">
+          <div className="pa-title">{p.title}</div>
+          <div className="pa-sub">{p.sub}</div>
+        </div>
+        <div className="pa-arrow">
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <line x1="5.5" y1="0" x2="5.5" y2="11"/>
+            <line x1="0" y1="5.5" x2="11" y2="5.5"/>
+          </svg>
         </div>
       </div>
-      <div className="proj-r">
-        <p className="proj-desc">{p.desc}</p>
-        <div className="proj-callout">
-          <span className="callout-label">{p.callout.label}</span>
-          <span className="callout-val">{p.callout.val}</span>
-          <span className="callout-sub">{p.callout.sub}</span>
+      <div className="pa-body">
+        <div className="pa-body-inner">
+          <div className="pa-content">
+            <div className="pa-left">
+              <div className="tag-cloud">
+                {p.tags.map((t,i) => <Tag key={i} label={t} idx={i}/>)}
+              </div>
+              <a href={p.gh} className="proj-gh" target="_blank" rel="noopener noreferrer">
+                {GH_ICON} View on GitHub
+              </a>
+            </div>
+            <div className="pa-right">
+              <p className="proj-desc">{p.desc}</p>
+              <div className="proj-callout">
+                <span className="callout-label">{p.callout.label}</span>
+                <span className="callout-val">{p.callout.val}</span>
+                <span className="callout-sub">{p.callout.sub}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -668,6 +898,8 @@ function ProjItem({ p, delay }) {
 
 function Projects() {
   const hRef = useReveal(0);
+  const [open, setOpen] = useState(0);
+  const toggle = (i) => setOpen(prev => prev === i ? -1 : i);
   return (
     <section className="projects" id="projects">
       <div className="sec-intro sr" ref={hRef}>
@@ -675,9 +907,13 @@ function Projects() {
           <div className="eyebrow">03 · Projects</div>
           <h2 className="sec-h">WHAT<br/>I'VE MADE</h2>
         </div>
-        <p className="sec-note" style={{textAlign:'right'}}>Selected systems. Both solve real problems at scale.</p>
+        <p className="sec-note" style={{textAlign:'right'}}>Five systems. All built to solve real problems.</p>
       </div>
-      {PROJECTS.map((p,i) => <ProjItem key={i} p={p} delay={i*0.08}/>)}
+      <div className="proj-accordion">
+        {PROJECTS.map((p,i) => (
+          <ProjRow key={i} p={p} isOpen={open===i} onToggle={()=>toggle(i)}/>
+        ))}
+      </div>
     </section>
   );
 }
