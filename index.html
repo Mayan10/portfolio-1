@@ -1,277 +1,482 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mayan sharma</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#030303">
+<title>Mayan Sharma</title>
+<meta name="description" content="Mayan Sharma builds machine learning systems that run in production. Vision, temporal graphs, and LLM infrastructure. Final year CS (ML/AI) at VIT Chennai.">
+<meta property="og:title" content="Mayan Sharma">
+<meta property="og:description" content="Models are the easy part, making them run is the job.">
+<meta property="og:type" content="website">
 
-    :root {
-      --bg: #020202;
-      --fg: #c8c8c8;
-      --fg-dim: #555;
-      --fg-bright: #efefef;
-      --link: #c8c8c8;
-      --link-hover: #ffffff;
-      --section-gap: 2.2rem;
-      --font: 'IBM Plex Mono', 'Courier New', monospace;
-    }
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a0a'/><text x='16' y='23' font-family='monospace' font-size='18' font-weight='700' fill='%23f2f2f2' text-anchor='middle'>m</text></svg>">
 
-    html, body {
-      height: 100%;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: var(--font);
-      font-size: 13.5px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      background-size: 180px 180px;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.075;
-    }
+<style>
+  :root{
+    --background:#030303;
+    --foreground:#c8c8c8;
+    --foreground-bright:#f2f2f2;
+    --card:#0a0a0a;
+    --muted-foreground:#6b6b6b;
+    --border:#242424;
+    --icon-border:#3a3a3a;
 
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: transparent;
-      pointer-events: none;
-      z-index: 0;
-    }
+    --radius:.75rem;
+    --radius-md:calc(var(--radius) * .8);
 
-    .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 4.5rem 2rem 6rem;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
+    --mono:"Geist Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
 
-    .wrap.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;border:0 solid var(--border)}
 
-    .header-line {
-      font-size: 13.5px;
-      font-weight: 400;
-      color: var(--fg-bright);
-      margin-bottom: 1.6rem;
-    }
+  html{
+    -webkit-text-size-adjust:100%;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    scroll-behavior:smooth;
+  }
 
-    .bio {
-      font-size: 13.5px;
-      font-weight: 300;
-      color: var(--fg);
-      line-height: 1.75;
-      margin-bottom: var(--section-gap);
-      max-width: 540px;
-    }
+  body{
+    background-color:var(--background);
+    color:var(--foreground);
+  }
 
-    .bio a {
-      color: var(--fg-bright);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: #3a3a3a;
-      transition: text-decoration-color 0.2s;
-    }
+  ::selection{background:color-mix(in oklab, var(--foreground-bright) 20%, transparent);color:var(--foreground-bright)}
 
-    .bio a:hover {
-      text-decoration-color: var(--fg-bright);
-    }
+  ul{list-style:none}
+  a{color:inherit;text-decoration:inherit}
+  button{font:inherit;letter-spacing:inherit;color:inherit;background-color:transparent;border-radius:0}
+  summary{display:list-item}
 
-    .section {
-      margin-bottom: var(--section-gap);
-    }
+  :focus-visible{outline:1px solid var(--foreground-bright);outline-offset:3px}
 
-    .section-label {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--fg-dim);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
+  /* ---------- main shell ---------- */
 
-    .section ul {
-      list-style: none;
-      padding: 0;
-    }
+  main{
+    margin-inline:auto;
+    display:flex;
+    flex-direction:column;
+    gap:44px;
+    max-width:680px;
+    padding:12vh 24px 14vh;
+    font-family:var(--mono);
+    font-size:14px;
+    line-height:1.6;
+  }
 
-    .section ul li {
-      margin-bottom: 0.15rem;
-      line-height: 1.65;
-    }
+  /* ---------- header ---------- */
 
-    .section ul li a {
-      color: var(--link);
-      text-decoration: none;
-      transition: color 0.15s;
-      font-size: 13.5px;
-      font-weight: 300;
-    }
+  header{display:flex;flex-direction:column;gap:12px}
 
-    .section ul li a:hover {
-      color: var(--link-hover);
-    }
+  h1{
+    font-size:1.5rem;
+    line-height:1.3333;
+    font-weight:700;
+    letter-spacing:.02em;
+    color:var(--foreground-bright);
+  }
+  h1 a{display:flex;align-items:center;gap:10px}
+  h1 .icon{
+    display:block;
+    width:48px;
+    height:48px;
+    border-radius:var(--radius-md);
+    border:1px solid var(--icon-border);
+    background:var(--card);
+    color:var(--foreground-bright);
+    font-size:22px;
+    line-height:46px;
+    text-align:center;
+    flex:none;
+  }
 
-    .meta {
-      color: var(--fg-dim);
-      font-size: 12px;
-      margin-left: 0.4rem;
-    }
+  .tagline{color:var(--foreground)}
+  .tagline .em{color:var(--foreground-bright)}
+  .caret{
+    margin-left:5px;
+    display:inline-block;
+    height:1.05em;
+    width:7px;
+    border-radius:1px;
+    background:var(--foreground-bright);
+    vertical-align:-0.15em;
+    animation:blink 1.1s step-end infinite;
+  }
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
 
-    .exp-entry {
-      margin-bottom: 0.85rem;
-    }
+  .sub{margin-top:14px;color:var(--muted-foreground)}
 
-    .exp-title {
-      color: var(--fg-bright);
-      font-size: 13px;
-      font-weight: 400;
-    }
+  .loss{margin-top:18px;line-height:0}
+  .loss path{
+    stroke-dasharray:300;
+    stroke-dashoffset:300;
+    animation:draw 1.8s cubic-bezier(.4,0,.2,1) .4s forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0}}
 
-    .exp-sub {
-      color: var(--fg-dim);
-      font-size: 12px;
-      font-weight: 300;
-    }
+  /* ---------- reveal on scroll ---------- */
 
-    .skills-line {
-      font-size: 12px;
-      font-weight: 300;
-      color: var(--fg-dim);
-      line-height: 1.9;
-    }
+  .reveal{opacity:0;transform:translateY(10px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
 
-    .skills-line span {
-      color: var(--fg);
-    }
+  /* ---------- sections ---------- */
 
-    .scanlines {
-      position: fixed;
-      inset: 0;
-      display: none;
-      pointer-events: none;
-      z-index: 0;
-    }
+  section{display:flex;flex-direction:column;gap:14px}
 
-    .footer {
-      margin-top: 4rem;
-      font-size: 11.5px;
-      color: #333;
-      font-weight: 300;
-    }
+  h2{
+    font-size:13px;
+    font-weight:400;
+    letter-spacing:.04em;
+    color:var(--muted-foreground);
+  }
 
-    @media (max-width: 520px) {
-      .wrap { padding: 3rem 1.4rem 5rem; }
-    }
-  </style>
+  .groups{display:flex;flex-direction:column;gap:28px}
+  .group{display:flex;flex-direction:column;gap:12px}
+
+  h3{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:12px;
+    font-weight:400;
+    letter-spacing:.04em;
+    color:var(--foreground);
+  }
+  h3::after{content:"";height:1px;flex:1;background-color:var(--border)}
+
+  /* ---------- the row grid ---------- */
+
+  .list{display:grid;gap:8px}
+  .item{
+    display:grid;
+    grid-template-columns:190px 1fr;
+    align-items:baseline;
+    gap:16px;
+  }
+  .item .key{color:var(--foreground);transition:color .15s cubic-bezier(.4,0,.2,1)}
+  .item .val{color:var(--muted-foreground);transition:color .15s cubic-bezier(.4,0,.2,1)}
+  @media (hover:hover){
+    .item:hover .key{color:var(--foreground-bright)}
+    .item:hover .val{color:var(--foreground)}
+  }
+  .item .val a{color:var(--foreground-bright);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border)}
+  .item .val a:hover{text-decoration-color:var(--foreground-bright)}
+  .item .key a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border);transition:color .15s,text-decoration-color .15s}
+  .item .key a:hover{text-decoration-color:var(--foreground-bright)}
+
+  /* ---------- actions ---------- */
+
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background-color:var(--card);
+    padding:7px 16px;
+    color:var(--foreground);
+    transition:color .15s, background-color .15s, border-color .15s;
+  }
+  .btn:hover{
+    border-color:var(--foreground-bright);
+    background-color:color-mix(in oklab, var(--foreground-bright) 8%, transparent);
+    color:var(--foreground-bright);
+  }
+  .btn .ico{width:16px;height:16px;flex-shrink:0;fill:currentColor}
+
+  .cmd{
+    display:flex;
+    max-width:100%;
+    align-items:stretch;
+    align-self:flex-start;
+    overflow:hidden;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background-color:var(--card);
+  }
+  .cmd code{
+    display:flex;
+    min-width:0;
+    align-items:center;
+    gap:8px;
+    overflow-x:auto;
+    padding:7px 16px;
+    white-space:pre;
+    font-family:inherit;
+    font-size:1em;
+  }
+  .cmd .dollar{flex-shrink:0;color:var(--muted-foreground);user-select:none}
+  .cmd button{
+    display:inline-flex;
+    flex-shrink:0;
+    align-items:center;
+    gap:8px;
+    border-left:1px solid var(--border);
+    padding:0 14px;
+    color:var(--muted-foreground);
+    cursor:pointer;
+    transition:color .15s, background-color .15s;
+  }
+  .cmd button:hover{
+    background-color:color-mix(in oklab, var(--foreground-bright) 8%, transparent);
+    color:var(--foreground-bright);
+  }
+
+  .badges{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted-foreground)}
+  .badges span{
+    display:inline-flex;
+    align-items:center;
+    border-radius:6px;
+    border:1px solid var(--border);
+    padding:3px 8px;
+  }
+
+  /* ---------- faq ---------- */
+
+  .faq{display:flex;flex-direction:column;gap:8px}
+  .faq details{border-bottom:1px solid var(--border)}
+  .faq summary{
+    display:flex;
+    cursor:pointer;
+    list-style:none;
+    align-items:baseline;
+    gap:10px;
+    padding-block:8px;
+    color:var(--foreground);
+    transition:color .15s;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:hover{color:var(--foreground-bright)}
+  .faq summary .plus{flex:none;color:var(--muted-foreground)}
+  .faq summary .plus::before{content:"+"}
+  .faq details[open] summary .plus::before{content:"-"}
+  .faq p{margin-bottom:12px;margin-left:20px;color:var(--muted-foreground)}
+  .faq p a{color:var(--foreground-bright);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border)}
+  .faq p a:hover{text-decoration-color:var(--foreground-bright)}
+
+  /* ---------- footer ---------- */
+
+  footer{font-size:13px;color:var(--muted-foreground)}
+  footer a{color:var(--foreground);transition:color .15s}
+  footer a:hover{color:var(--foreground-bright)}
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width:559px){
+    .item{grid-template-columns:1fr;gap:2px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .caret{animation:none}
+    .loss path{animation:none;stroke-dashoffset:0}
+    .reveal{opacity:1;transform:none}
+    *{transition:none !important}
+  }
+</style>
 </head>
 <body>
+<main>
 
-  <div class="scanlines"></div>
+  <header class="reveal">
+    <h1>
+      <a href="/"><span class="icon">m</span>mayan</a>
+    </h1>
+    <p class="tagline">Models are the easy part, <span class="em">making them run</span> is the job.<span aria-hidden="true" class="caret"></span></p>
+    <p class="sub">Final year CS (ML/AI) at VIT Chennai. I build vision, graph, and LLM systems that hold up on real data.<br>Open to full time roles from 2027.</p>
+    <div class="loss" aria-hidden="true">
+      <svg viewBox="0 0 120 28" width="110" height="26" fill="none">
+        <path d="M2 5 L14 11 L26 8 L38 16 L50 13 L62 20 L74 17 L86 23 L98 21 L118 24" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted-foreground)"/>
+      </svg>
+    </div>
+  </header>
 
-  <div class="wrap" id="wrap">
-
-    <p class="header-line">mayan works on</p>
-
-    <div class="bio">
-      building intelligent systems where ml research meets real deployment.
-      focused on computer vision, intelligent agents, and applied ml systems.
-      b.tech cs (ml/ai) @ <a href="https://vit.ac.in" target="_blank">vit chn</a>.
+  <section class="reveal">
+    <div class="row">
+      <a class="btn" href="resume.pdf" download>
+        <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8.5 1.5a.5.5 0 0 0-1 0v6.79L5.35 6.15a.5.5 0 1 0-.7.7l3 3a.5.5 0 0 0 .7 0l3-3a.5.5 0 0 0-.7-.7L8.5 8.29V1.5ZM2.5 10a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 12.5 14h-9A1.5 1.5 0 0 1 2 12.5v-2a.5.5 0 0 1 .5-.5Z"/></svg>
+        Resume
+      </a>
+      <a class="btn" href="https://github.com/Mayan10" target="_blank" rel="noreferrer">
+        <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        GitHub
+      </a>
+      <a class="btn" href="https://www.linkedin.com/in/mayanchn" target="_blank" rel="noreferrer">
+        <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.6 5.4H.9V15h2.7V5.4ZM2.25 4.2a1.57 1.57 0 1 0 0-3.15 1.57 1.57 0 0 0 0 3.15ZM15 9.6c0-2.6-1.4-3.8-3.26-3.8-1.5 0-2.17.83-2.55 1.4V5.4H6.5V15h2.7V9.7c0-1.14.4-1.86 1.4-1.86.94 0 1.4.66 1.4 1.86V15H15V9.6Z"/></svg>
+        LinkedIn
+      </a>
     </div>
 
-    <div class="section">
-      <p class="section-label">Experience</p>
-      <ul>
-        <li>
-          <div class="exp-entry">
-            <div class="exp-title">ml engineer intern @ nokia <span class="meta">may 2026</span></div>
-            <div class="exp-sub">ml systems and applied research</div>
-          </div>
-        </li>
-        <li>
-          <div class="exp-entry">
-            <div class="exp-title">applied ml engineer @ DRDO <span class="meta">may – jul 2025</span></div>
-            <div class="exp-sub">real-time aircraft recognition, YOLOv8, 97% detection accuracy</div>
-          </div>
-        </li>
-        <li>
-          <div class="exp-entry">
-            <div class="exp-title">applied ml & systems engineer @ vit chn cnvd <span class="meta">may – jul 2024</span></div>
-            <div class="exp-sub">FIR filter automation, FPGA, Verilog codegen, 50% time reduction</div>
-          </div>
-        </li>
-      </ul>
+    <div class="cmd">
+      <code><span class="dollar" aria-hidden="true">$</span><span id="email">mayan25sharma@gmail.com</span></code>
+      <button type="button" id="copyBtn" aria-label="Copy mayan25sharma@gmail.com to the clipboard">
+        <span aria-live="polite" id="copyLabel">Copy</span>
+      </button>
     </div>
 
-    <div class="section">
-      <p class="section-label">Projects</p>
-      <ul>
-        <li>
-          <a href="https://github.com/Mayan10" target="_blank">LAMDA</a>
-          <span class="meta">supply chain risk prediction, TGN, GNNs, 16% accuracy gain</span>
-        </li>
-        <li>
-          <a href="https://github.com/Mayan10" target="_blank">DraftEase</a>
-          <span class="meta">floor plan retrieval & CAD automation, KNN, OpenCV</span>
-        </li>
-        <li>
-          <a href="https://github.com/Mayan10" target="_blank">aircraft vision system</a>
-          <span class="meta">YOLOv8 two-stage pipeline, 10k+ auto-annotated images, lab-certified @ DRDO</span>
-        </li>
-      </ul>
+    <div class="badges">
+      <span>VIT Chennai '27</span>
+      <span>CGPA 8.65</span>
+      <span>ex-DRDO</span>
+      <span>AWS SA-A</span>
+      <span>open to 2027 roles</span>
     </div>
+  </section>
 
-    <div class="section">
-      <p class="section-label">Stack</p>
-      <div class="skills-line">
-        <span>Python, PyTorch, HuggingFace, LangGraph, LlamaIndex</span><br>
-        <span>YOLOv8, DETR, ViT, GNNs, TGN, RAG, llm fine-tuning</span><br>
-        <span>FAISS, ChromaDB, Docker, AWS, W&amp;B, Langfuse</span>
+  <section class="reveal">
+    <h2>Work</h2>
+    <div class="groups">
+
+      <div class="group">
+        <h3>projects</h3>
+        <ul class="list">
+          <li class="item">
+            <span class="key">FlowConX</span>
+            <span class="val">classifies encrypted network traffic from flow shape alone, no deep packet inspection. 90.4% accuracy at 13.65 ms per flow across 112,000 labelled flows. <a href="https://github.com/Mayan10/Flowconx" target="_blank" rel="noreferrer">source</a></span>
+          </li>
+          <li class="item">
+            <span class="key">LAMDA</span>
+            <span class="val">predicts supply chain disruption by modelling the network as a temporal graph, 50,000+ snapshots, 16% over a GCN baseline. <a href="https://github.com/Mayan10/LAMDA" target="_blank" rel="noreferrer">source</a></span>
+          </li>
+          <li class="item">
+            <span class="key">Enhanced HQ-LSTM</span>
+            <span class="val">solar PV forecasting benchmark comparing quantum, hybrid, and classical sequence models, the code behind the IET paper. <a href="https://github.com/Mayan10/Enhanced-HQLSTM-Model" target="_blank" rel="noreferrer">source</a></span>
+          </li>
+          <li class="item">
+            <span class="key">Bellwether</span>
+            <span class="val">in progress: real time financial intelligence, temporal graph risk scoring under a multi agent LLM layer, Kafka and Neo4j underneath</span>
+          </li>
+        </ul>
       </div>
+
+      <div class="group">
+        <h3>experience</h3>
+        <ul class="list">
+          <li class="item">
+            <span class="key">DRDO</span>
+            <span class="val">real time aircraft recognition automating arresting gear selection, two stage YOLOv8 at 97% accuracy, plus an auto annotator that labelled 10,000+ images</span>
+          </li>
+          <li class="item">
+            <span class="key">VLSI Design Centre</span>
+            <span class="val">automated FIR filter design end to end, coefficient optimisation over 100+ parameters and a Verilog generator for FPGA deployment</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>research &amp; recognition</h3>
+        <ul class="list">
+          <li class="item">
+            <span class="key"><a href="https://doi.org/10.1049/icp.2026.1046" target="_blank" rel="noreferrer">IET, BICET 2025</a></span>
+            <span class="val">first author, Enhanced Hybrid Quantum-LSTM for Solar PV Forecasting</span>
+          </li>
+          <li class="item">
+            <span class="key"><a href="https://www.credly.com/badges/824d5a41-6742-4cce-ab33-0babc5073b95/linked_in_profile" target="_blank" rel="noreferrer">AWS</a></span>
+            <span class="val">Certified Solutions Architect, Associate</span>
+          </li>
+          <li class="item">
+            <span class="key">Nokia CREONIX 2025</span>
+            <span class="val">winner</span>
+          </li>
+        </ul>
+      </div>
+
     </div>
+  </section>
 
-    <div class="section">
-      <p class="section-label">Social</p>
-      <ul>
-        <li><a href="https://github.com/Mayan10" target="_blank">github.com/Mayan10</a></li>
-        <li><a href="https://linkedin.com/in/mayanchn" target="_blank">linkedin.com/in/mayanchn</a></li>
-        <li><a href="mailto:mayan25sharma@gmail.com">mayan25sharma@gmail.com</a></li>
-        <li><a href="tel:+918791383268">+91 87913 83268</a></li>
-      </ul>
+  <section class="reveal">
+    <h2>Stack</h2>
+    <ul class="list">
+      <li class="item"><span class="key">languages</span><span class="val">Python, C, C++, SQL</span></li>
+      <li class="item"><span class="key">vision</span><span class="val">YOLO, DETR, ViT, OpenCV</span></li>
+      <li class="item"><span class="key">graphs, sequences</span><span class="val">GNNs, Temporal Graph Networks, LSTMs, Transformers</span></li>
+      <li class="item"><span class="key">llms</span><span class="val">RAG, fine tuning (SFT, RLHF, GRPO), context engineering, evaluation</span></li>
+      <li class="item"><span class="key">agents</span><span class="val">LangGraph, LlamaIndex, smolagents, FAISS, ChromaDB</span></li>
+      <li class="item"><span class="key">frameworks</span><span class="val">PyTorch, TensorFlow, scikit-learn, Hugging Face (Transformers, TRL, Accelerate)</span></li>
+      <li class="item"><span class="key">mlops</span><span class="val">Docker, Kubernetes, Terraform, GitHub Actions, MLflow, DVC, Airflow</span></li>
+      <li class="item"><span class="key">observability</span><span class="val">Prometheus, Grafana, Weights &amp; Biases, Langfuse</span></li>
+      <li class="item"><span class="key">cloud</span><span class="val">AWS, Solutions Architect Associate</span></li>
+      <li class="item"><span class="key">data</span><span class="val">Pandas, NumPy, feature engineering, statistical analysis, Matplotlib, Seaborn</span></li>
+      <li class="item"><span class="key">tools</span><span class="val">Git, Linux, Jupyter</span></li>
+    </ul>
+  </section>
+
+  <section class="reveal">
+    <h2>FAQ</h2>
+    <div class="faq">
+      <details>
+        <summary><span class="plus" aria-hidden="true"></span>What are you looking for?</summary>
+        <p>Full time roles starting 2027: applied ML and research engineering, GenAI and LLM engineering, or ML infrastructure. Open to internships before then. Based in India, happy to relocate.</p>
+      </details>
+      <details>
+        <summary><span class="plus" aria-hidden="true"></span>What are you building right now?</summary>
+        <p>Bellwether, a real time financial intelligence platform that pairs temporal graph risk scoring with a multi agent LLM layer. Kafka and Neo4j underneath, a fine tuned small model doing the reasoning, deployed on EKS with the full observability stack. It is my final year project and the most end to end thing I have attempted.</p>
+      </details>
+      <details>
+        <summary><span class="plus" aria-hidden="true"></span>What was the hardest thing to build?</summary>
+        <p>FlowConX. Classifying traffic you cannot decrypt means every signal has to come from timing and shape: packet sizes, inter arrival times, jitter, byte rates. Getting a contrastive objective to produce clean, well separated embeddings from that, across three datasets collected under completely different conditions, took far more iteration than the architecture did.</p>
+      </details>
+      <details>
+        <summary><span class="plus" aria-hidden="true"></span>How do you learn?</summary>
+        <p>Mostly by reading source and rebuilding things. Hugging Face courses, Hands-On ML, and a lot of documentation. If I cannot reimplement it, I do not consider it learned.</p>
+      </details>
+      <details>
+        <summary><span class="plus" aria-hidden="true"></span>How do I reach you?</summary>
+        <p>Email is best, <a href="mailto:mayan25sharma@gmail.com">mayan25sharma@gmail.com</a>. I am also on <a href="https://www.linkedin.com/in/mayanchn" target="_blank" rel="noreferrer">LinkedIn</a>.</p>
+      </details>
     </div>
+  </section>
 
-    <div class="footer">2026 mayan sharma</div>
+  <footer>
+    Built by Mayan Sharma &middot; <a href="https://github.com/Mayan10" target="_blank" rel="noreferrer">GitHub</a> &middot; <a href="https://www.linkedin.com/in/mayanchn" target="_blank" rel="noreferrer">LinkedIn</a> &middot; <a href="mailto:mayan25sharma@gmail.com">Email</a> &middot; &copy; 2026
+  </footer>
 
-  </div>
+</main>
 
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        document.getElementById('wrap').classList.add('visible');
-      }, 200);
+<script>
+  (function () {
+    var reveals = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      reveals.forEach(function (el) { el.classList.add('visible'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+    }
+  })();
+
+  (function () {
+    var btn = document.getElementById('copyBtn');
+    var label = document.getElementById('copyLabel');
+    var email = document.getElementById('email');
+    if (!btn || !label || !email) return;
+    btn.addEventListener('click', function () {
+      var text = email.textContent.trim();
+      function done(){ label.textContent = 'Copied'; setTimeout(function(){ label.textContent = 'Copy'; }, 1600); }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) { label.textContent = 'Failed'; }
+        document.body.removeChild(ta);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
     });
-  </script>
+  })();
+</script>
 </body>
 </html>
