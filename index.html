@@ -10,7 +10,7 @@
 <meta property="og:description" content="Models are the easy part, making them run is the job.">
 <meta property="og:type" content="website">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a0a'/><text x='16' y='23' font-family='monospace' font-size='18' font-weight='700' fill='%23f2f2f2' text-anchor='middle'>m</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232618df'/><text x='16' y='23' font-family='monospace' font-size='18' font-weight='700' fill='%23f2f2f2' text-anchor='middle'>m</text></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +25,7 @@
     --muted-foreground:#6b6b6b;
     --border:#242424;
     --icon-border:#3a3a3a;
+    --brand:#2618df;
 
     --radius:.75rem;
     --radius-md:calc(var(--radius) * .8);
@@ -86,9 +87,9 @@
     width:48px;
     height:48px;
     border-radius:var(--radius-md);
-    border:1px solid var(--icon-border);
-    background:var(--card);
-    color:var(--foreground-bright);
+    border:1px solid var(--brand);
+    background:var(--brand);
+    color:#f2f2f2;
     font-size:22px;
     line-height:46px;
     text-align:center;
@@ -110,14 +111,6 @@
   @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
 
   .sub{margin-top:14px;color:var(--muted-foreground)}
-
-  .loss{margin-top:18px;line-height:0}
-  .loss path{
-    stroke-dasharray:300;
-    stroke-dashoffset:300;
-    animation:draw 1.8s cubic-bezier(.4,0,.2,1) .4s forwards;
-  }
-  @keyframes draw{to{stroke-dashoffset:0}}
 
   /* ---------- reveal on scroll ---------- */
 
@@ -275,7 +268,6 @@
 
   @media (prefers-reduced-motion:reduce){
     .caret{animation:none}
-    .loss path{animation:none;stroke-dashoffset:0}
     .reveal{opacity:1;transform:none}
     *{transition:none !important}
   }
@@ -290,11 +282,6 @@
     </h1>
     <p class="tagline">Models are the easy part, <span class="em">making them run</span> is the job.<span aria-hidden="true" class="caret"></span></p>
     <p class="sub">Final year CS (ML/AI) at VIT Chennai. I build vision, graph, and LLM systems that hold up on real data.<br>Open to full time roles from 2027.</p>
-    <div class="loss" aria-hidden="true">
-      <svg viewBox="0 0 120 28" width="110" height="26" fill="none">
-        <path d="M2 5 L14 11 L26 8 L38 16 L50 13 L62 20 L74 17 L86 23 L98 21 L118 24" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted-foreground)"/>
-      </svg>
-    </div>
   </header>
 
   <section class="reveal">
@@ -341,8 +328,8 @@
             <span class="val">classifies encrypted network traffic from flow shape alone, no deep packet inspection. 90.4% accuracy at 13.65 ms per flow across 112,000 labelled flows. <a href="https://github.com/Mayan10/Flowconx" target="_blank" rel="noreferrer">source</a></span>
           </li>
           <li class="item">
-            <span class="key">LAMDA</span>
-            <span class="val">predicts supply chain disruption by modelling the network as a temporal graph, 50,000+ snapshots, 16% over a GCN baseline. <a href="https://github.com/Mayan10/LAMDA" target="_blank" rel="noreferrer">source</a></span>
+            <span class="key">Tunnel</span>
+            <span class="val">reorders Apple Music playlists into smoother listening flows, on-device Core ML embeddings on the Apple Neural Engine plus a per-playlist ranker trained in seconds. Cuts benchmark tempo jump ~55% and genre distance ~45% against a shuffled baseline, no network calls, no cloud inference. <a href="https://github.com/Mayan10/tunnel" target="_blank" rel="noreferrer">source</a></span>
           </li>
           <li class="item">
             <span class="key">Enhanced HQ-LSTM</span>
@@ -360,11 +347,11 @@
         <ul class="list">
           <li class="item">
             <span class="key">DRDO</span>
-            <span class="val">real time aircraft recognition automating arresting gear selection, two stage YOLOv8 at 97% accuracy, plus an auto annotator that labelled 10,000+ images</span>
+            <span class="val">Built and deployed a real time aircraft recognition system for automated ground equipment selection, improving operational safety under field constraints. Designed a two stage YOLOv8 vision pipeline for detection and classification, optimised for low-latency inference. Built a custom auto-annotation model that labelled 10,000+ images across aircraft classes, cutting dataset prep time. Passed DRDO lab evaluations as the most reliable model deployed for the use case</span>
           </li>
           <li class="item">
             <span class="key">VLSI Design Centre</span>
-            <span class="val">automated FIR filter design end to end, coefficient optimisation over 100+ parameters and a Verilog generator for FPGA deployment</span>
+            <span class="val">Built a Python automation system for digital filter design, cutting manual design time 50%. Implemented numerical optimisation algorithms over 100+ parameters, improving output efficiency 25%. Automated an end-to-end code generation and configuration pipeline supporting 10+ design variants</span>
           </li>
         </ul>
       </div>
@@ -393,16 +380,16 @@
   <section class="reveal">
     <h2>Stack</h2>
     <ul class="list">
-      <li class="item"><span class="key">languages</span><span class="val">Python, C, C++, SQL</span></li>
+      <li class="item"><span class="key">languages</span><span class="val">Python, C++, SQL</span></li>
       <li class="item"><span class="key">vision</span><span class="val">YOLO, DETR, ViT, OpenCV</span></li>
       <li class="item"><span class="key">graphs, sequences</span><span class="val">GNNs, Temporal Graph Networks, LSTMs, Transformers</span></li>
       <li class="item"><span class="key">llms</span><span class="val">RAG, fine tuning (SFT, RLHF, GRPO), context engineering, evaluation</span></li>
       <li class="item"><span class="key">agents</span><span class="val">LangGraph, LlamaIndex, smolagents, FAISS, ChromaDB</span></li>
-      <li class="item"><span class="key">frameworks</span><span class="val">PyTorch, TensorFlow, scikit-learn, Hugging Face (Transformers, TRL, Accelerate)</span></li>
-      <li class="item"><span class="key">mlops</span><span class="val">Docker, Kubernetes, Terraform, GitHub Actions, MLflow, DVC, Airflow</span></li>
+      <li class="item"><span class="key">frameworks</span><span class="val">PyTorch, scikit-learn, Hugging Face (Transformers, TRL, Datasets, Accelerate)</span></li>
+      <li class="item"><span class="key">mlops</span><span class="val">Docker, Kubernetes, Terraform, GitHub Actions, GitLab CI, MLflow, DVC, Airflow</span></li>
       <li class="item"><span class="key">observability</span><span class="val">Prometheus, Grafana, Weights &amp; Biases, Langfuse</span></li>
       <li class="item"><span class="key">cloud</span><span class="val">AWS, Solutions Architect Associate</span></li>
-      <li class="item"><span class="key">data</span><span class="val">Pandas, NumPy, feature engineering, statistical analysis, Matplotlib, Seaborn</span></li>
+      <li class="item"><span class="key">data</span><span class="val">Pandas, NumPy, feature engineering, statistical analysis, Matplotlib</span></li>
       <li class="item"><span class="key">tools</span><span class="val">Git, Linux, Jupyter</span></li>
     </ul>
   </section>
