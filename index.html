@@ -112,23 +112,6 @@
 
   .sub{margin-top:14px;color:var(--muted-foreground)}
 
-  .eq{
-    margin-top:14px;
-    color:var(--muted-foreground);
-    font-size:15px;
-  }
-  .eq .hl{color:var(--foreground-bright)}
-  .eq .sum{
-    display:inline-flex;
-    flex-direction:column;
-    align-items:center;
-    vertical-align:middle;
-    line-height:1.1;
-    margin:0 2px;
-  }
-  .eq .sum .sigma{font-size:1.5em;color:var(--foreground)}
-  .eq .sum .under{font-size:.55em;color:var(--muted-foreground);white-space:nowrap}
-
   /* ---------- reveal on scroll ---------- */
 
   .reveal{opacity:0;transform:translateY(10px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
@@ -352,9 +335,6 @@
     </h1>
     <p class="tagline">Models are the easy part, <span class="em">making them run</span> is the job.<span aria-hidden="true" class="caret"></span></p>
     <p class="sub">I build vision, graph, and LLM systems that hold up on real data.</p>
-    <p class="eq" aria-label="shipped equals model plus the sum of everything else">
-      <span class="hl">shipped</span> = <span class="hl">model</span> + <span class="sum"><span class="sigma" aria-hidden="true">&sum;</span><span class="under">everything else</span></span>
-    </p>
   </header>
 
   <section class="reveal">
