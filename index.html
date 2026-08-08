@@ -162,6 +162,67 @@
   .item .key a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border);transition:color .15s,text-decoration-color .15s}
   .item .key a:hover{text-decoration-color:var(--foreground-bright)}
 
+  /* ---------- expandable rows (series expansion) ---------- */
+  /* collapsed state = the leading term of the sum; expanding "adds" the remaining terms in, one by one */
+
+  .val.expand{
+    display:block;
+    width:100%;
+    min-width:0;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .val.expand .summary{transition:color .15s cubic-bezier(.4,0,.2,1)}
+  .val.expand .toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-left:7px;
+    min-width:20px;
+    height:16px;
+    padding:0 5px;
+    border-radius:5px;
+    border:1px solid var(--border);
+    font-size:10px;
+    line-height:1;
+    letter-spacing:0;
+    color:var(--muted-foreground);
+    vertical-align:2px;
+    transition:color .15s cubic-bezier(.4,0,.2,1),border-color .15s cubic-bezier(.4,0,.2,1),transform .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  @media (hover:hover){
+    .val.expand:hover .toggle{color:var(--foreground-bright);border-color:var(--foreground-bright)}
+  }
+  .val.expand .toggle .n{display:inline}
+  .val.expand .toggle .x{display:none}
+  .val.expand[aria-expanded="true"] .toggle{transform:rotate(180deg)}
+  .val.expand[aria-expanded="true"] .toggle .n{display:none}
+  .val.expand[aria-expanded="true"] .toggle .x{display:inline}
+
+  .val.expand .terms{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .5s cubic-bezier(.4,0,.2,1);
+  }
+  .val.expand[aria-expanded="true"] .terms{grid-template-rows:1fr}
+  .val.expand .terms > .terms-inner{overflow:hidden}
+
+  .val.expand .term{
+    display:flex;
+    gap:8px;
+    padding-top:8px;
+    opacity:0;
+    transform:translateY(-5px);
+    transition:opacity .35s ease,transform .35s ease;
+    transition-delay:0s;
+  }
+  .val.expand[aria-expanded="true"] .term{opacity:1;transform:translateY(0)}
+  .val.expand[aria-expanded="true"] .term:nth-child(1){transition-delay:.06s}
+  .val.expand[aria-expanded="true"] .term:nth-child(2){transition-delay:.13s}
+  .val.expand[aria-expanded="true"] .term:nth-child(3){transition-delay:.2s}
+  .val.expand .term .sign{flex:none;color:var(--muted-foreground)}
+  .val.expand .terms a{display:inline-block;margin-top:8px}
+
   /* ---------- actions ---------- */
 
   .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
@@ -281,7 +342,7 @@
       <a href="/"><span class="icon">m</span>mayan</a>
     </h1>
     <p class="tagline">Models are the easy part, <span class="em">making them run</span> is the job.<span aria-hidden="true" class="caret"></span></p>
-    <p class="sub">Final year CS (ML/AI) at VIT Chennai. I build vision, graph, and LLM systems that hold up on real data.<br>Open to full time roles from 2027.</p>
+    <p class="sub">I build vision, graph, and LLM systems that hold up on real data.</p>
   </header>
 
   <section class="reveal">
@@ -325,19 +386,44 @@
         <ul class="list">
           <li class="item">
             <span class="key">FlowConX</span>
-            <span class="val">classifies encrypted network traffic from flow shape alone, no deep packet inspection. 90.4% accuracy at 13.65 ms per flow across 112,000 labelled flows. <a href="https://github.com/Mayan10/Flowconx" target="_blank" rel="noreferrer">source</a></span>
+            <div class="val expand" role="button" tabindex="0" aria-expanded="false">
+              <span class="summary">classifies encrypted network traffic from flow shape alone, no deep packet inspection.</span><span class="toggle" aria-hidden="true"><span class="n">+1</span><span class="x">&times;</span></span>
+              <div class="terms"><div class="terms-inner">
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>90.4% accuracy at 13.65 ms per flow across 112,000 labelled flows.</span></p>
+                <a href="https://github.com/Mayan10/Flowconx" target="_blank" rel="noreferrer">source &rarr;</a>
+              </div></div>
+            </div>
           </li>
           <li class="item">
             <span class="key">Tunnel</span>
-            <span class="val">reorders Apple Music playlists into smoother listening flows, on-device Core ML embeddings on the Apple Neural Engine plus a per-playlist ranker trained in seconds. Cuts benchmark tempo jump ~55% and genre distance ~45% against a shuffled baseline, no network calls, no cloud inference. <a href="https://github.com/Mayan10/tunnel" target="_blank" rel="noreferrer">source</a></span>
+            <div class="val expand" role="button" tabindex="0" aria-expanded="false">
+              <span class="summary">reorders Apple Music playlists into smoother listening flows, on-device Core ML embeddings on the Apple Neural Engine plus a per-playlist ranker trained in seconds.</span><span class="toggle" aria-hidden="true"><span class="n">+2</span><span class="x">&times;</span></span>
+              <div class="terms"><div class="terms-inner">
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>cuts benchmark tempo jump ~55% and genre distance ~45% against a shuffled baseline.</span></p>
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>no network calls, no cloud inference, everything runs on-device.</span></p>
+                <a href="https://github.com/Mayan10/tunnel" target="_blank" rel="noreferrer">source &rarr;</a>
+              </div></div>
+            </div>
           </li>
           <li class="item">
             <span class="key">Enhanced HQ-LSTM</span>
-            <span class="val">solar PV forecasting benchmark comparing quantum, hybrid, and classical sequence models, the code behind the IET paper. <a href="https://github.com/Mayan10/Enhanced-HQLSTM-Model" target="_blank" rel="noreferrer">source</a></span>
+            <div class="val expand" role="button" tabindex="0" aria-expanded="false">
+              <span class="summary">solar PV forecasting benchmark comparing quantum, hybrid, and classical sequence models.</span><span class="toggle" aria-hidden="true"><span class="n">+1</span><span class="x">&times;</span></span>
+              <div class="terms"><div class="terms-inner">
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>the code behind the IET, BICET 2025 paper.</span></p>
+                <a href="https://github.com/Mayan10/Enhanced-HQLSTM-Model" target="_blank" rel="noreferrer">source &rarr;</a>
+              </div></div>
+            </div>
           </li>
           <li class="item">
             <span class="key">Bellwether</span>
-            <span class="val">in progress: real time financial intelligence, temporal graph risk scoring under a multi agent LLM layer, Kafka and Neo4j underneath</span>
+            <div class="val expand" role="button" tabindex="0" aria-expanded="false">
+              <span class="summary">in progress: real time financial intelligence platform.</span><span class="toggle" aria-hidden="true"><span class="n">+2</span><span class="x">&times;</span></span>
+              <div class="terms"><div class="terms-inner">
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>temporal graph risk scoring under a multi agent LLM layer.</span></p>
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>Kafka and Neo4j underneath.</span></p>
+              </div></div>
+            </div>
           </li>
         </ul>
       </div>
@@ -347,11 +433,24 @@
         <ul class="list">
           <li class="item">
             <span class="key">DRDO</span>
-            <span class="val">Built and deployed a real time aircraft recognition system for automated ground equipment selection, improving operational safety under field constraints. Designed a two stage YOLOv8 vision pipeline for detection and classification, optimised for low-latency inference. Built a custom auto-annotation model that labelled 10,000+ images across aircraft classes, cutting dataset prep time. Passed DRDO lab evaluations as the most reliable model deployed for the use case</span>
+            <div class="val expand" role="button" tabindex="0" aria-expanded="false">
+              <span class="summary">built and deployed a real time aircraft recognition system for automated ground equipment selection, improving operational safety under field constraints.</span><span class="toggle" aria-hidden="true"><span class="n">+3</span><span class="x">&times;</span></span>
+              <div class="terms"><div class="terms-inner">
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>designed a two stage YOLOv8 vision pipeline for detection and classification, optimised for low-latency inference.</span></p>
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>built a custom auto-annotation model that labelled 10,000+ images across aircraft classes, cutting dataset prep time.</span></p>
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>passed DRDO lab evaluations as the most reliable model deployed for the use case.</span></p>
+              </div></div>
+            </div>
           </li>
           <li class="item">
             <span class="key">VLSI Design Centre</span>
-            <span class="val">Built a Python automation system for digital filter design, cutting manual design time 50%. Implemented numerical optimisation algorithms over 100+ parameters, improving output efficiency 25%. Automated an end-to-end code generation and configuration pipeline supporting 10+ design variants</span>
+            <div class="val expand" role="button" tabindex="0" aria-expanded="false">
+              <span class="summary">built a Python automation system for digital filter design, cutting manual design time 50%.</span><span class="toggle" aria-hidden="true"><span class="n">+2</span><span class="x">&times;</span></span>
+              <div class="terms"><div class="terms-inner">
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>implemented numerical optimisation algorithms over 100+ parameters, improving output efficiency 25%.</span></p>
+                <p class="term"><span class="sign" aria-hidden="true">+</span><span>automated an end-to-end code generation and configuration pipeline supporting 10+ design variants.</span></p>
+              </div></div>
+            </div>
           </li>
         </ul>
       </div>
@@ -442,6 +541,27 @@
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
       reveals.forEach(function (el) { io.observe(el); });
     }
+  })();
+
+  (function () {
+    var boxes = document.querySelectorAll('.val.expand');
+    boxes.forEach(function (box) {
+      function toggle() {
+        var open = box.getAttribute('aria-expanded') === 'true';
+        box.setAttribute('aria-expanded', String(!open));
+      }
+      box.addEventListener('click', function (e) {
+        if (e.target.closest('a')) return;
+        toggle();
+      });
+      box.addEventListener('keydown', function (e) {
+        if (e.target !== box) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
   })();
 
   (function () {
