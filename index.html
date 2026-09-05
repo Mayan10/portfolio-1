@@ -313,6 +313,35 @@
   footer a{color:var(--foreground);transition:color .15s}
   footer a:hover{color:var(--foreground-bright)}
 
+  /* ---------- grain ---------- */
+  /* one 160px noise tile, repeated, nudged between 8 fixed positions.
+     to remove: delete this block, the .grain rule in prefers-reduced-motion,
+     and the .grain div at the top of the body. */
+
+  .grain{
+    position:fixed;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    z-index:9999;
+    pointer-events:none;
+    opacity:.07; /* the knob: .04 is barely there, .11 is heavy */
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.35 0.35 0.35 0 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='2' intercept='-0.5'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E");
+    animation:grain 1s steps(1) infinite;
+  }
+
+  @keyframes grain{
+    0%    {transform:translate(0,0)}
+    12.5% {transform:translate(-6%,-4%)}
+    25%   {transform:translate(4%,-8%)}
+    37.5% {transform:translate(-8%,6%)}
+    50%   {transform:translate(6%,4%)}
+    62.5% {transform:translate(-4%,-6%)}
+    75%   {transform:translate(8%,8%)}
+    87.5% {transform:translate(-6%,2%)}
+  }
+
   /* ---------- responsive ---------- */
 
   @media (max-width:559px){
@@ -321,12 +350,14 @@
 
   @media (prefers-reduced-motion:reduce){
     .caret{animation:none}
+    .grain{animation:none}
     .reveal{opacity:1;transform:none}
     *{transition:none !important}
   }
 </style>
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
 <main>
 
   <header class="reveal">
